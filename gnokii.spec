@@ -1,5 +1,5 @@
 %define	name	gnokii
-%define	version	0.6.14
+%define	version	0.6.15
 %define	rel	1
 %define	release	%mkrel %{rel}
 %define	Summary	Tool suite for Nokia mobile phones
@@ -105,17 +105,6 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sysconfdir}
 sed 's#/usr/local/sbin/#%{_sbindir}/#' <Docs/sample/gnokiirc >$RPM_BUILD_ROOT%{_sysconfdir}/gnokiirc
 
-install -d $RPM_BUILD_ROOT%{_menudir}
-cat <<EOF > $RPM_BUILD_ROOT%{_menudir}/%{name}-x%{name}
-?package(gnokii-xgnokii):command="%{_bindir}/x%{name}" \
-		icon=x%{name}.png \
-		needs="x11" \
-		section="Office/Communications/Phone" \
-		title="XGnokii"\
-		longtitle="%{Summary}" \
-		xdg="true"
-EOF
-
 desktop-file-install	--vendor="" \
 			--remove-category="Application" \
 			--add-category="X-MandrivaLinux-Office-Communications-Phone" \
@@ -164,30 +153,24 @@ cd -
 %doc utils/*.sis
 %{_bindir}/%{name}
 %{_bindir}/sendsms
-%{_bindir}/ppm2nokia
-%{_bindir}/waitcall
 %{_sbindir}/%{name}d
 %{_sbindir}/m%{name}dev
 %config(noreplace) %{_sysconfdir}/%{name}rc
 %attr(777,root,gnokii) %{_var}/lock/gnokii
 %{_mandir}/man1/gnokii.1*
 %{_mandir}/man1/sendsms.1*
-%{_mandir}/man1/ppm2nokia.1*
 %{_mandir}/man8/gnokiid.8*
 %{_mandir}/man8/mgnokiidev.8*
 
 %files xgnokii -f %{name}.lang
 %defattr(-,root,root)
 %{_bindir}/x%{name}
-%{_bindir}/todologo
 %{_datadir}/x%{name}
-%{_menudir}/%{name}-x%{name}
 %{_datadir}/applications/xgnokii.desktop
 %{_miconsdir}/x%{name}.png
 %{_iconsdir}/x%{name}.png
 %{_liconsdir}/x%{name}.png
 %{_mandir}/man1/xgnokii.1x*
-%{_mandir}/man1/todologo.1*
 
 %files -n %{libname}
 %defattr(-,root,root)
@@ -204,5 +187,3 @@ cd -
 %files -n %{libnamestaticdev}
 %defattr(-,root,root)
 %{_libdir}/*.a
-
-
