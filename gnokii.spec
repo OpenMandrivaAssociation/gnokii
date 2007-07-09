@@ -1,13 +1,13 @@
 %define	name	gnokii
-%define	version	0.6.15
+%define	version	0.6.17
 %define	rel	1
 %define	release	%mkrel %{rel}
 %define	Summary	Tool suite for Nokia mobile phones
 
 %define	major	3
 %define	libname			%mklibname %{name} %major
-%define	libnamedev		%mklibname %{name} %major -d
-%define	libnamestaticdev	%mklibname %{name} %major -d -s
+%define	libnamedev		%mklibname %{name} -d
+%define	libnamestaticdev	%mklibname %{name} -d -s
 
 Summary:	%{Summary}
 Name:		%{name}
@@ -63,6 +63,7 @@ Group: 		Development/C
 Provides:	lib%{name}-devel = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}
+Obsoletes:	%{libname}-devel
 
 %description -n %{libnamedev}
 Gnokii is a Linux/Unix tool suite and (eventually) modem/fax driver for
@@ -77,6 +78,7 @@ Provides:	%{name}-static = %{version}-%{release}
 Provides:	%{name}-static-devel = %{version}-%{release}
 Provides:	lib%{name}-static = %{version}-%{release}
 Provides:	lib%{name}-static-devel = %{version}-%{release}
+Obsoletes:	%{libname}-static-devel
 
 %description -n	%{libnamestaticdev}
 Static library for %{name}
