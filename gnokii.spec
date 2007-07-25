@@ -1,5 +1,5 @@
 %define	name	gnokii
-%define	version	0.6.17
+%define	version	0.6.18
 %define	rel	1
 %define	release	%mkrel %{rel}
 %define	Summary	Tool suite for Nokia mobile phones
