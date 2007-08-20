@@ -172,7 +172,7 @@ cd -
 %{_miconsdir}/x%{name}.png
 %{_iconsdir}/x%{name}.png
 %{_liconsdir}/x%{name}.png
-%{_mandir}/man1/xgnokii.1x*
+%{_mandir}/man1/xgnokii.1*
 
 %files -n %{libname}
 %defattr(-,root,root)
