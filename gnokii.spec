@@ -1,6 +1,6 @@
 %define	name	gnokii
 %define	version	0.6.19
-%define	rel	1
+%define	rel	2
 %define	release	%mkrel %{rel}
 %define	Summary	Tool suite for Nokia mobile phones
 
@@ -23,12 +23,14 @@ Source0:	http://www.gnokii.org/download/gnokii/%{name}-%{version}.tar.bz2
 #Patch1:		gnokii-0.6.4-fixcrash.patch.bz2
 #Patch2:		gnokii-0.6.5-gcc4-fix.patch.bz2
 Patch3:		gnokii-0.6.8-fix-locking.patch
+Patch4:		gnokii-0.6.19-stack-corruption-fix.patch
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
 Buildrequires:	xpm-devel gtk+2-devel bison bluez-devel
 BuildRequires:	autoconf2.5 >= 2.52
 BuildRequires:	desktop-file-utils
+BuildRequires:	libusb-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires(pre):	rpm-helper
 Requires(postun):	rpm-helper
@@ -89,6 +91,7 @@ Static library for %{name}
 #%patch1 -p1 -b .fixcrash
 #%patch2 -p1 -b .gcc4
 %patch3 -p1 -b .lock
+%patch4 -p1 -b .stack-corruption
 
 #needed by patch0
 autoconf
@@ -97,7 +100,8 @@ rm Docs/Makefile
 
 %build
 %configure2_5x	--enable-security \
-		--with-pic
+		--with-pic \
+		--enable-libusb
 %make -k || make
 
 %install
