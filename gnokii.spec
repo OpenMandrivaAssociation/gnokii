@@ -1,6 +1,6 @@
 %define	name	gnokii
-%define	version	0.6.19
-%define	rel	2
+%define	version	0.6.20
+%define	rel	1
 %define	release	%mkrel %{rel}
 %define	Summary	Tool suite for Nokia mobile phones
 
@@ -24,6 +24,7 @@ Source0:	http://www.gnokii.org/download/gnokii/%{name}-%{version}.tar.bz2
 #Patch2:		gnokii-0.6.5-gcc4-fix.patch.bz2
 Patch3:		gnokii-0.6.8-fix-locking.patch
 Patch4:		gnokii-0.6.19-stack-corruption-fix.patch
+Patch5:		gnokii-0.6.20-no-docs-install-rules.patch
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
@@ -92,6 +93,7 @@ Static library for %{name}
 #%patch2 -p1 -b .gcc4
 %patch3 -p1 -b .lock
 %patch4 -p1 -b .stack-corruption
+%patch5 -p1 -b .docs-install
 
 #needed by patch0
 autoconf
@@ -106,7 +108,7 @@ rm Docs/Makefile
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%makeinstall
+%{makeinstall}-devel
 
 install -d $RPM_BUILD_ROOT%{_sysconfdir}
 sed 's#/usr/local/sbin/#%{_sbindir}/#' <Docs/sample/gnokiirc >$RPM_BUILD_ROOT%{_sysconfdir}/gnokiirc
