@@ -25,6 +25,7 @@ Source0:	http://www.gnokii.org/download/gnokii/%{name}-%{version}.tar.bz2
 Patch3:		gnokii-0.6.8-fix-locking.patch
 Patch4:		gnokii-0.6.19-stack-corruption-fix.patch
 Patch5:		gnokii-0.6.20-no-docs-install-rules.patch
+Patch6:		gnokii-0.6.21-fix-pkgconfig-install.patch
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
@@ -94,6 +95,7 @@ Static library for %{name}
 %patch3 -p1 -b .lock
 %patch4 -p1 -b .stack-corruption
 %patch5 -p1 -b .docs-install
+%patch6 -p0 -b .pkgconfig
 
 #needed by patch0
 autoconf
