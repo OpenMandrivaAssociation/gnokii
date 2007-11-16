@@ -109,7 +109,7 @@ rm Docs/Makefile
 %configure2_5x	--enable-security \
 		--with-pic \
 		--enable-libusb
-%make -k || make
+make
 
 %install
 rm -rf $RPM_BUILD_ROOT
