@@ -1,6 +1,6 @@
 %define	name	gnokii
-%define	version	0.6.21
-%define	rel	2
+%define	version	0.6.22
+%define	rel	1
 %define	release	%mkrel %{rel}
 %define	Summary	Tool suite for Nokia mobile phones
 
@@ -13,26 +13,18 @@ Summary:	%{Summary}
 Name:		%{name}
 Version: 	%{version}
 Release:	%{release}
-License:	GPL
+License:	GPLv2+
 Url:		http://www.gnokii.org/
 Group:		Communications
 Source0:	http://www.gnokii.org/download/gnokii/%{name}-%{version}.tar.bz2
-# (gb) directly applies to aclocal.m4, don't bother with aclocal
-#Patch0:		gnokii-0.6.7-libtool.patch.bz2
-# (fc) 0.6.4-4mdk fix crash with some locales (Mdk bug 13666) (CVS)
-#Patch1:		gnokii-0.6.4-fixcrash.patch.bz2
-#Patch2:		gnokii-0.6.5-gcc4-fix.patch.bz2
 Patch3:		gnokii-0.6.8-fix-locking.patch
 Patch4:		gnokii-0.6.19-stack-corruption-fix.patch
-Patch5:		gnokii-0.6.20-no-docs-install-rules.patch
-Patch6:		gnokii-0.6.21-fix-pkgconfig-install.patch
 Patch7:		gnokii-0.6.21-fix-xgnokii-browser.patch
+Patch8:		gnokii-0.6.22-fix-xgnokii-mandir.patch
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
 Buildrequires:	xpm-devel gtk+2-devel bison bluez-devel
-BuildRequires:	autoconf2.5 >= 2.52
-BuildRequires:	desktop-file-utils
 BuildRequires:	libusb-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires(pre):	rpm-helper
@@ -91,53 +83,30 @@ Static library for %{name}
 
 %prep
 %setup -q 
-#%patch0 -p1 -b .libtool
-#%patch1 -p1 -b .fixcrash
-#%patch2 -p1 -b .gcc4
 %patch3 -p1 -b .lock
 %patch4 -p1 -b .stack-corruption
-%patch5 -p1 -b .docs-install
-%patch6 -p0 -b .pkgconfig
 %patch7 -p0
-
-#needed by patch0
-autoconf
-mv Docs/man man
-rm Docs/Makefile
+%patch8 -p0
 
 %build
 %configure2_5x	--enable-security \
 		--with-pic \
 		--enable-libusb
-make
+%make
 
 %install
 rm -rf $RPM_BUILD_ROOT
+%{makeinstall_std}
 %{makeinstall_std}-devel
 
 install -d $RPM_BUILD_ROOT%{_sysconfdir}
 sed 's#/usr/local/sbin/#%{_sbindir}/#' <Docs/sample/gnokiirc >$RPM_BUILD_ROOT%{_sysconfdir}/gnokiirc
 
-desktop-file-install	--vendor="" \
-			--remove-category="Application" \
-			--add-category="X-MandrivaLinux-Office-Communications-Phone" \
-			--dir $RPM_BUILD_ROOT%{_datadir}/applications \
-			$RPM_BUILD_ROOT%{_datadir}/applications/*
-
 install -m644 %{SOURCE11} -D $RPM_BUILD_ROOT%{_miconsdir}/x%{name}.png
 install -m644 %{SOURCE12} -D $RPM_BUILD_ROOT%{_iconsdir}/x%{name}.png
 install -m644 %{SOURCE13} -D $RPM_BUILD_ROOT%{_liconsdir}/x%{name}.png
 
-# for now remove sis file
-rm -rf $RPM_BUILD_ROOT%{_docdir}/gnokii/*.sis
-
 install -d $RPM_BUILD_ROOT%{_var}/lock/gnokii
-
-cd man
-for i in *.1*; do install -m644 $i -D %{buildroot}%{_mandir}/man1/$i; done
-for i in *.8*; do install -m644 $i -D %{buildroot}%{_mandir}/man8/$i; done
-cd -
-
 
 %find_lang %{name}
 
@@ -162,7 +131,12 @@ cd -
 
 %files
 %defattr(-,root,root)
-%doc Docs/* ChangeLog TODO
+%doc ChangeLog TODO MAINTAINERS
+%doc Docs/Bugs Docs/CREDITS Docs/DataCalls-QuickStart
+%doc Docs/FAQ Docs/gnokii-IrDA-Linux Docs/gnokii-ir-howto
+%doc Docs/gnokii.nol Docs/KNOWN_BUGS
+%doc Docs/README* Docs/sample
+%doc Docs/*.txt
 %doc utils/*.sis
 %{_bindir}/%{name}
 %{_bindir}/sendsms
@@ -183,14 +157,17 @@ cd -
 %{_miconsdir}/x%{name}.png
 %{_iconsdir}/x%{name}.png
 %{_liconsdir}/x%{name}.png
-%{_mandir}/man1/xgnokii.1*
+%{_mandir}/man1/xgnokii*
 
 %files -n %{libname}
 %defattr(-,root,root)
-%{_libdir}/*.so.*
+%{_libdir}/*.so.%{major}*
 
 %files -n %{libnamedev}
 %defattr(-,root,root)
+%doc Docs/gnokii-hackers-howto
+%doc Docs/gettext-howto
+%doc Docs/protocol
 %{_includedir}/*.h
 %{_includedir}/%{name}
 %{_libdir}/*.so
