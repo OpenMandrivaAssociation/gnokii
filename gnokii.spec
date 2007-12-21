@@ -26,6 +26,7 @@ Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
 Buildrequires:	xpm-devel gtk+2-devel bison bluez-devel
 BuildRequires:	libusb-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires(pre):	rpm-helper
 Requires(postun):	rpm-helper
 
