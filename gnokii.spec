@@ -53,7 +53,7 @@ computer and more other features.
 
 %package        smsd
 Summary:        Gnokii SMS daemon
-Group:          System Environment/Daemons
+Group:          Communications
 Requires:       %{name} = %{version}-%{release}
 Requires(post):  rpm-helper
 Requires(preun):  rpm-helper
@@ -63,7 +63,7 @@ The Gnokii SMS daemon receives and sends SMS messages.
 
 %package        smsd-pgsql
 Summary:        PostgreSQL support for Gnokii SMS daemon
-Group:          System Environment/Daemons
+Group:          Communications
 Requires:       %{name}-smsd = %{version}-%{release}
 
 %description    smsd-pgsql
@@ -71,7 +71,7 @@ Requires:       %{name}-smsd = %{version}-%{release}
 
 %package        smsd-mysql
 Summary:        MySQL support for Gnokii SMS daemon
-Group:          System Environment/Daemons
+Group:          Communications
 Requires:       %{name}-smsd = %{version}-%{release}
 
 %description    smsd-mysql
