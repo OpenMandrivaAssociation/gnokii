@@ -182,9 +182,13 @@ install -d $RPM_BUILD_ROOT%{_var}/lock/gnokii
 %preun smsd
 %_preun_service gnokii-smsd
 
+%if %mdkversion < 200900
 %post -n %{libname} -p /sbin/ldconfig
+%endif
 
+%if %mdkversion < 200900
 %postun -n %{libname} -p /sbin/ldconfig
+%endif
 
 %clean
 %{__rm} -rf $RPM_BUILD_ROOT
