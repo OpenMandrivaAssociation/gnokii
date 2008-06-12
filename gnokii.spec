@@ -164,11 +164,15 @@ install -d $RPM_BUILD_ROOT%{_var}/lock/gnokii
 %postun
 %_postun_groupdel %{name}
 
+%if %mdkversion < 200900
 %post xgnokii
 %{update_menus}
+%endif
 
+%if %mdkversion < 200900
 %postun xgnokii
 %{clean_menus}
+%endif
 
 %pre smsd
 %_pre_useradd gnokii / /sbin/nologin
