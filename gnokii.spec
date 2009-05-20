@@ -24,6 +24,7 @@ Source5:        %{name}-smsd2mail.sh
 Source6:        %{name}-smsd-README.smsd2mail
 Patch3:		gnokii-0.6.8-fix-locking.patch
 Patch7:		gnokii-0.6.27-fix-xgnokii-browser.patch
+Patch8:		gnokii-0.6.27-wformat.patch
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
@@ -115,6 +116,7 @@ Static library for %{name}
 %setup -q 
 %patch3 -p1 -b .lock
 %patch7 -p0
+%patch8 -p1 -b .wformat
 
 install -pm 644 %{SOURCE5} smsd2mail.sh
 install -pm 644 %{SOURCE6} README.smsd2mail
