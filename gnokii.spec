@@ -12,6 +12,9 @@
 Summary:	%{Summary}
 Name:		%{name}
 Version: 	%{version}
+%if %mdkversion < 201000
+%define subrel  1
+%endif
 Release:	%{release}
 License:	GPLv2+
 Url:		http://www.gnokii.org/
