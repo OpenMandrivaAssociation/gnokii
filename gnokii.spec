@@ -1,6 +1,6 @@
 %define	name	gnokii
 %define	version	0.6.27
-%define	rel	4
+%define	rel	5
 %define	release	%mkrel %{rel}
 %define	Summary	Tool suite for Nokia mobile phones
 
@@ -28,6 +28,7 @@ Source6:        %{name}-smsd-README.smsd2mail
 Patch3:		gnokii-0.6.8-fix-locking.patch
 Patch7:		gnokii-0.6.27-fix-xgnokii-browser.patch
 Patch8:		gnokii-0.6.27-wformat.patch
+Patch9:		gnokii-0.6.27-fix-linking.patch
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
@@ -120,6 +121,8 @@ Static library for %{name}
 %patch3 -p1 -b .lock
 %patch7 -p0
 %patch8 -p1 -b .wformat
+%patch9 -p1
+autoreconf -fi
 
 install -pm 644 %{SOURCE5} smsd2mail.sh
 install -pm 644 %{SOURCE6} README.smsd2mail
