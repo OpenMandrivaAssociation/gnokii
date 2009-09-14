@@ -35,7 +35,7 @@ Source13:	%{name}-48x48.png
 Buildrequires:	xpm-devel gtk+2-devel bison bluez-devel
 BuildRequires:	libusb-devel
 BuildRequires:	mysql-devel postgresql-devel
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-devel intltool
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires(pre):	rpm-helper
 Requires(postun):	rpm-helper
