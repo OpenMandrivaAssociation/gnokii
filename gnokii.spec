@@ -1,10 +1,10 @@
 %define	name	gnokii
-%define	version	0.6.27
-%define	rel	5
+%define	version	0.6.28.1
+%define	rel	1
 %define	release	%mkrel %{rel}
 %define	Summary	Tool suite for Nokia mobile phones
 
-%define	major	4
+%define	major	5
 %define	libname			%mklibname %{name} %major
 %define	libnamedev		%mklibname %{name} -d
 %define	libnamestaticdev	%mklibname %{name} -d -s
@@ -26,9 +26,6 @@ Source4:        %{name}-smsd.logrotate
 Source5:        %{name}-smsd2mail.sh
 Source6:        %{name}-smsd-README.smsd2mail
 Patch3:		gnokii-0.6.8-fix-locking.patch
-Patch7:		gnokii-0.6.27-fix-xgnokii-browser.patch
-Patch8:		gnokii-0.6.27-wformat.patch
-Patch9:		gnokii-0.6.27-fix-linking.patch
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
@@ -118,11 +115,8 @@ Obsoletes:	%mklibname -d -s %name 3
 Static library for %{name}
 
 %prep
-%setup -q 
+%setup -q -n %{name}-0.6.28
 %patch3 -p1 -b .lock
-%patch7 -p0
-%patch8 -p1 -b .wformat
-%patch9 -p1
 autoreconf -fi
 
 install -pm 644 %{SOURCE5} smsd2mail.sh
@@ -226,7 +220,6 @@ install -d $RPM_BUILD_ROOT%{_var}/lock/gnokii
 %files xgnokii -f %{name}.lang
 %defattr(-,root,root)
 %{_bindir}/x%{name}
-%{_datadir}/x%{name}
 %{_datadir}/applications/xgnokii.desktop
 %{_miconsdir}/x%{name}.png
 %{_iconsdir}/x%{name}.png
