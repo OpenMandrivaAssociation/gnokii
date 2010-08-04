@@ -1,10 +1,10 @@
 %define	name	gnokii
-%define	version	0.6.28.1
-%define	rel	2
+%define	version	0.6.29
+%define	rel	1
 %define	release	%mkrel %{rel}
 %define	Summary	Tool suite for Nokia mobile phones
 
-%define	major	5
+%define	major	6
 %define	libname			%mklibname %{name} %major
 %define	libnamedev		%mklibname %{name} -d
 %define	libnamestaticdev	%mklibname %{name} -d -s
@@ -115,7 +115,7 @@ Obsoletes:	%mklibname -d -s %name 3
 Static library for %{name}
 
 %prep
-%setup -q -n %{name}-0.6.28
+%setup -q -n %{name}-%{version}
 %patch3 -p1 -b .lock
 autoreconf -fi
 
