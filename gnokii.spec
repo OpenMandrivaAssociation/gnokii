@@ -1,6 +1,6 @@
 %define	name	gnokii
-%define	version	0.6.29
-%define	rel	3
+%define	version	0.6.30
+%define	rel	1
 %define	release	%mkrel %{rel}
 %define	Summary	Tool suite for Nokia mobile phones
 
@@ -32,6 +32,7 @@ Source13:	%{name}-48x48.png
 Buildrequires:	xpm-devel gtk+2-devel bison bluez-devel
 BuildRequires:	libusb-devel
 BuildRequires:	mysql-devel postgresql-devel
+BuildRequires:	sqlite3-devel
 BuildRequires:	gettext-devel intltool
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires(pre):	rpm-helper
@@ -236,6 +237,7 @@ install -d $RPM_BUILD_ROOT%{_var}/lock/gnokii
 %{_mandir}/man8/gnokii-smsd.8*
 %dir %{_libdir}/smsd/
 %{_libdir}/smsd/libsmsd_file.so
+%{_libdir}/smsd/libsmsd_sqlite.so
 
 %files smsd-pgsql
 %defattr(-,root,root,-)
