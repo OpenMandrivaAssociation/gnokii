@@ -130,7 +130,7 @@ install -pm 644 %{SOURCE6} README.smsd2mail
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %{makeinstall_std}
 
 # Rename smsd to gnokii-smsd
@@ -139,23 +139,23 @@ mv %buildroot%{_mandir}/man8/{,gnokii-}smsd.8
 sed -i 's,smsd ,gnokii-smsd ,' %buildroot%{_mandir}/man8/gnokii-smsd.8
 sed -i 's,smsd.,gnokii-smsd.,' %buildroot%{_mandir}/man8/gnokii-smsd.8
 
-install -d $RPM_BUILD_ROOT%{_sysconfdir}
-sed 's#/usr/local/sbin/#%{_sbindir}/#' <Docs/sample/gnokiirc >$RPM_BUILD_ROOT%{_sysconfdir}/gnokiirc
+install -d %{buildroot}%{_sysconfdir}
+sed 's#/usr/local/sbin/#%{_sbindir}/#' <Docs/sample/gnokiirc >%{buildroot}%{_sysconfdir}/gnokiirc
 
 # remove smsd libtool archives
 rm -f %buildroot%_libdir/smsd/*.{la,a}
 
 # install the configuration files
-install -Dpm 755 %{SOURCE2} $RPM_BUILD_ROOT%{_initrddir}/gnokii-smsd
-install -Dpm 640 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/gnokii-smsd
+install -Dpm 755 %{SOURCE2} %{buildroot}%{_initrddir}/gnokii-smsd
+install -Dpm 640 %{SOURCE3} %{buildroot}%{_sysconfdir}/sysconfig/gnokii-smsd
 install -Dpm 644 %{SOURCE4} \
-  $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.d/gnokii-smsd
+  %{buildroot}%{_sysconfdir}/logrotate.d/gnokii-smsd
 
-install -m644 %{SOURCE11} -D $RPM_BUILD_ROOT%{_miconsdir}/x%{name}.png
-install -m644 %{SOURCE12} -D $RPM_BUILD_ROOT%{_iconsdir}/x%{name}.png
-install -m644 %{SOURCE13} -D $RPM_BUILD_ROOT%{_liconsdir}/x%{name}.png
+install -m644 %{SOURCE11} -D %{buildroot}%{_miconsdir}/x%{name}.png
+install -m644 %{SOURCE12} -D %{buildroot}%{_iconsdir}/x%{name}.png
+install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/x%{name}.png
 
-install -d $RPM_BUILD_ROOT%{_var}/lock/gnokii
+install -d %{buildroot}%{_var}/lock/gnokii
 
 %find_lang %{name}
 
@@ -196,7 +196,7 @@ install -d $RPM_BUILD_ROOT%{_var}/lock/gnokii
 %endif
 
 %clean
-%{__rm} -rf $RPM_BUILD_ROOT
+%{__rm} -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
