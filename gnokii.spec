@@ -4,7 +4,7 @@
 %define	release	%mkrel %{rel}
 %define	Summary	Tool suite for Nokia mobile phones
 
-%define	major	6
+%define	major	7
 %define	libname			%mklibname %{name} %major
 %define	libnamedev		%mklibname %{name} -d
 %define	libnamestaticdev	%mklibname %{name} -d -s
@@ -31,6 +31,7 @@ Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
 Buildrequires:	xpm-devel gtk+2-devel bison bluez-devel
 BuildRequires:	libusb-devel
+BuildRequires:	libical-devel
 BuildRequires:	mysql-devel postgresql-devel
 BuildRequires:	sqlite3-devel
 BuildRequires:	gettext-devel intltool
@@ -128,10 +129,15 @@ install -pm 644 %{SOURCE6} README.smsd2mail
 		--with-pic \
 		--enable-libusb
 %make
+cd xgnokii
+%make
 
 %install
 rm -rf %{buildroot}
 %{makeinstall_std}
+cd xgnokii
+%{makeinstall_std}
+cd ..
 
 # Rename smsd to gnokii-smsd
 mv %buildroot%{_bindir}/{,gnokii-}smsd
@@ -165,16 +171,6 @@ install -d %{buildroot}%{_var}/lock/gnokii
 %postun
 %_postun_groupdel %{name}
 
-%if %mdkversion < 200900
-%post xgnokii
-%{update_menus}
-%endif
-
-%if %mdkversion < 200900
-%postun xgnokii
-%{clean_menus}
-%endif
-
 %pre smsd
 %_pre_useradd gnokii / /sbin/nologin
 
@@ -186,14 +182,6 @@ install -d %{buildroot}%{_var}/lock/gnokii
 
 %preun smsd
 %_preun_service gnokii-smsd
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
 
 %clean
 %{__rm} -rf %{buildroot}
