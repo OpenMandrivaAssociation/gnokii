@@ -249,7 +249,9 @@ install -d %{buildroot}%{_var}/lock/gnokii
 %{_includedir}/*.h
 %{_includedir}/%{name}
 %{_libdir}/*.so
+%if %mdvver <= 201100
 %{_libdir}/*.la
+%endif
 %{_libdir}/pkgconfig/*
 
 %files -n %{libnamestaticdev}
