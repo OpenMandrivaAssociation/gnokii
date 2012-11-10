@@ -1,0 +1,10 @@
+sources:
+  "gnokii-0.6.31.tar.bz2:"	b053ed2327997b5730bddc4b63d77388f9fff08c
+  "gnokii-16x16.png:"	50aaaf97550550f5c89c7f0dbef4db92dd0f8040
+  "gnokii-32x32.png:"	d8ce663d0c23ef0d630438d9bb0eb5f691089a56
+  "gnokii-48x48.png:"	2fac1dd765ab2501e4a58beee8bff280d7143608
+  "gnokii-smsd2mail.sh:"	a7c31196b4d74e5762c3fe68729999502becec2f
+  "gnokii-smsd.init:"	659fb551a9cc1803513868ab9118784816201d69
+  "gnokii-smsd.logrotate:"	85d7ea5cd006829b2a734bf596ba3d267fff9a67
+  "gnokii-smsd-README.smsd2mail:"	dbaf44646117edb6e802b1d4c5202ee7fdc4f508
+  "gnokii-smsd.sysconfig:"	c7230c98721e603b6f34ff91fa42533a9a1825f1

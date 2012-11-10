@@ -1,0 +1,11 @@
+--- gnokii-0.6.8/common/misc.c~	2005-07-24 21:16:22.000000000 +0200
++++ gnokii-0.6.8/common/misc.c	2005-09-05 18:04:09.000000000 +0200
+@@ -392,7 +392,7 @@ API void gn_elog_write(const char *fmt, 
+ #if defined (__svr4__)
+ #  define lock_path "/var/run/LCK.."
+ #else
+-#  define lock_path "/var/lock/LCK.."
++#  define lock_path "/var/lock/gnokii/LCK.."
+ #endif
+ 
+ /* Lock the device. Return allocated string with a lock name */
