@@ -57,8 +57,7 @@ computer and more other features.
 Summary:        Gnokii SMS daemon
 Group:          Communications
 Requires:       %{name} = %{version}-%{release}
-Requires(post):  rpm-helper
-Requires(preun):  rpm-helper
+Requires(post,preun):  rpm-helper
 
 %description    smsd
 The Gnokii SMS daemon receives and sends SMS messages.
@@ -91,8 +90,6 @@ Summary:	Development libraries and headers for gnokii
 Group: 		Development/C
 Provides:	%{name}-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}
-Obsoletes:	%mklibname -d %name 3
-Obsoletes:	%mklibname -s -d %name 3
 
 %description -n %{devname}
 Development Libraries
@@ -210,7 +207,7 @@ install -d %{buildroot}%{_var}/lock/gnokii
 %{_libdir}/smsd/libsmsd_mysql.so
 
 %files -n %{libname}
-%{_libdir}/*.so.%{major}*
+%{_libdir}/libgnokii.so.%{major}*
 
 %files -n %{devname}
 %doc Docs/gnokii-hackers-howto
