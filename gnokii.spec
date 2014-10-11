@@ -1,4 +1,5 @@
 %define url_ver %(echo %{version}|cut -d. -f1,2).x
+%define _disable_ld_no_undefined 1
 
 %define	major	7
 %define	libname	%mklibname %{name} %major
@@ -18,6 +19,7 @@ Source4:        %{name}-smsd.logrotate
 Source5:        %{name}-smsd2mail.sh
 Source6:        %{name}-smsd-README.smsd2mail
 Patch3:		gnokii-0.6.8-fix-locking.patch
+Patch4:		gnokii-clang.patch
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
@@ -97,7 +99,7 @@ Development Libraries
 %prep
 %setup -q
 %apply_patches
-autoreconf -fi
+#autoreconf -fi
 
 install -pm 644 %{SOURCE5} smsd2mail.sh
 install -pm 644 %{SOURCE6} README.smsd2mail
