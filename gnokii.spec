@@ -8,7 +8,7 @@
 Summary:	Summary Tool suite for Nokia mobile phones
 Name:		gnokii
 Version: 	0.6.31
-Release:	10
+Release:	11
 License:	GPLv2+
 Group:		Communications
 Url:		http://www.gnokii.org/
