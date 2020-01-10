@@ -98,7 +98,7 @@ Development Libraries
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 #autoreconf -fi
 
 install -pm 644 %{SOURCE5} smsd2mail.sh
