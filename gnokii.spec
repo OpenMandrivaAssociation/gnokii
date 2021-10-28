@@ -170,7 +170,7 @@ install -d %{buildroot}%{_var}/lock/gnokii
 %doc Docs/README* Docs/sample
 %doc Docs/*.txt
 %doc utils/*.sis
-%doc gnokii/*
+%{_datadir}/gnokii/*
 %{_bindir}/%{name}
 %{_bindir}/sendsms
 %{_bindir}/%{name}d
