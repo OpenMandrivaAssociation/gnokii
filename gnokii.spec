@@ -8,7 +8,7 @@
 Summary:	Summary Tool suite for Nokia mobile phones
 Name:		gnokii
 Version: 	0.6.31
-Release:	13
+Release:	14
 License:	GPLv2+
 Group:		Communications
 Url:		http://www.gnokii.org/
@@ -105,18 +105,18 @@ install -pm 644 %{SOURCE5} smsd2mail.sh
 install -pm 644 %{SOURCE6} README.smsd2mail
 
 %build
-%configure2_5x	\
+%configure	\
 	--disable-static \
 	--enable-libusb \
 	--enable-security \
 	--with-pic
-%make
+%make_build
 cd xgnokii
-%make
+%make_build
 
 %install
-%makeinstall_std
-%makeinstall_std -C xgnokii
+%make_install
+%make_install -C xgnokii
 
 # Rename smsd to gnokii-smsd
 mv %buildroot%{_bindir}/{,gnokii-}smsd
@@ -170,6 +170,7 @@ install -d %{buildroot}%{_var}/lock/gnokii
 %doc Docs/README* Docs/sample
 %doc Docs/*.txt
 %doc utils/*.sis
+%doc gnokii/*
 %{_bindir}/%{name}
 %{_bindir}/sendsms
 %{_bindir}/%{name}d
