@@ -1,2 +1,5 @@
 sources:
-  "gnokii-0.6.31.tar.bz2": b053ed2327997b5730bddc4b63d77388f9fff08c
+  gnokii-0.6.31.tar.bz2: b053ed2327997b5730bddc4b63d77388f9fff08c
+  gnokii-16x16.png: 50aaaf97550550f5c89c7f0dbef4db92dd0f8040
+  gnokii-32x32.png: d8ce663d0c23ef0d630438d9bb0eb5f691089a56
+  gnokii-48x48.png: 2fac1dd765ab2501e4a58beee8bff280d7143608

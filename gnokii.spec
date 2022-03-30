@@ -1,23 +1,23 @@
 %define url_ver %(echo %{version}|cut -d. -f1,2).x
 %define _disable_ld_no_undefined 1
 
-%define	major	7
-%define	libname	%mklibname %{name} %major
-%define	devname	%mklibname %{name} -d
+%define major 7
+%define libname %mklibname %{name} %major
+%define devname %mklibname %{name} -d
 
 Summary:	Summary Tool suite for Nokia mobile phones
 Name:		gnokii
 Version: 	0.6.31
-Release:	14
+Release:	15
 License:	GPLv2+
 Group:		Communications
 Url:		http://www.gnokii.org/
 Source0:	http://www.gnokii.org/download/gnokii/%{url_ver}/%{name}-%{version}.tar.bz2
-Source2:        %{name}-smsd.init
-Source3:        %{name}-smsd.sysconfig
-Source4:        %{name}-smsd.logrotate
-Source5:        %{name}-smsd2mail.sh
-Source6:        %{name}-smsd-README.smsd2mail
+Source2:	%{name}-smsd.init
+Source3:	%{name}-smsd.sysconfig
+Source4:	%{name}-smsd.logrotate
+Source5:	%{name}-smsd2mail.sh
+Source6:	%{name}-smsd-README.smsd2mail
 Patch3:		gnokii-0.6.8-fix-locking.patch
 Patch4:		gnokii-clang.patch
 Source11:	%{name}-16x16.png
@@ -164,13 +164,7 @@ install -d %{buildroot}%{_var}/lock/gnokii
 
 %files
 %doc ChangeLog TODO MAINTAINERS
-%doc Docs/Bugs Docs/CREDITS Docs/DataCalls-QuickStart
-%doc Docs/FAQ Docs/gnokii-IrDA-Linux Docs/gnokii-ir-howto
-%doc Docs/gnokii.nol Docs/KNOWN_BUGS
-%doc Docs/README* Docs/sample
-%doc Docs/*.txt
-%doc utils/*.sis
-%{_datadir}/doc/gnokii/*
+%doc %{_docdir}/gnokii
 %{_bindir}/%{name}
 %{_bindir}/sendsms
 %{_bindir}/%{name}d
@@ -191,7 +185,6 @@ install -d %{buildroot}%{_var}/lock/gnokii
 %{_mandir}/man1/xgnokii*
 
 %files smsd
-%doc smsd/action smsd/ChangeLog smsd/README README.smsd2mail smsd2mail.sh
 %attr(-,gnokii,gnokii) %config(noreplace) %{_sysconfdir}/sysconfig/gnokii-smsd
 %config(noreplace) %{_sysconfdir}/logrotate.d/gnokii-smsd
 %{_initrddir}/gnokii-smsd
@@ -202,22 +195,16 @@ install -d %{buildroot}%{_var}/lock/gnokii
 %{_libdir}/smsd/libsmsd_sqlite.so
 
 %files smsd-pgsql
-%doc smsd/sms.tables.pq.sql
 %{_libdir}/smsd/libsmsd_pq.so
 
 %files smsd-mysql
-%doc smsd/sms.tables.mysql.sql
 %{_libdir}/smsd/libsmsd_mysql.so
 
 %files -n %{libname}
 %{_libdir}/libgnokii.so.%{major}*
 
 %files -n %{devname}
-%doc Docs/gnokii-hackers-howto
-%doc Docs/gettext-howto
-%doc Docs/protocol
 %{_includedir}/*.h
 %{_includedir}/%{name}
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*
-
