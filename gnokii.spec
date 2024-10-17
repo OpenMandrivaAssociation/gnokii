@@ -11,7 +11,7 @@ Version: 	0.6.31
 Release:	16
 License:	GPLv2+
 Group:		Communications
-Url:		http://www.gnokii.org/
+Url:		https://www.gnokii.org/
 Source0:	http://www.gnokii.org/download/gnokii/%{url_ver}/%{name}-%{version}.tar.bz2
 Source2:	%{name}-smsd.init
 Source3:	%{name}-smsd.sysconfig
